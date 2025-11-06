@@ -1,82 +1,61 @@
-# Lightweight React Template for KAVIA
+# Fresh Fruit Market - React Frontend
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+A lightweight React app for an online fruit shop using the Ocean Professional palette (blue primary, amber accents) with subtle retro styling.
 
-## Features
+## Highlights
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Hash-based routing via `react-router-dom@6`
+- ThemeContext with dark/light mode, persisted to localStorage
+- CartContext with full cart operations and persisted state
+- API client reads env base URL and gracefully falls back to mock data
+- Product catalog, product detail, cart, and checkout flow
+- Accessible components and semantic markup
 
 ## Getting Started
 
-In the project directory, you can run:
+Install dependencies and start the app:
 
-### `npm start`
-
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-### `npm test`
-
-Launches the test runner in interactive watch mode.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Customization
-
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
+```bash
+npm install
+npm start
 ```
 
-### Components
+Open http://localhost:3000
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
+## Environment Variables
 
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
+Copy `.env.example` to `.env` and set:
 
-## Learn More
+- `REACT_APP_API_BASE` (preferred) or `REACT_APP_BACKEND_URL`/`REACT_APP_FRONTEND_URL`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+If not set or the backend is unreachable, the app uses mock data for products and checkout.
 
-### Code Splitting
+## Scripts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- `npm start` - dev server
+- `npm test` - run tests
+- `npm run build` - production build
 
-### Analyzing the Bundle Size
+## Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+src/
+  api/client.js
+  components/{Header,Footer,ProductCard,Loading}.js
+  contexts/{ThemeContext,CartContext}.js
+  pages/{Home,ProductDetail,Cart,Checkout,NotFound}.js
+  App.js App.css index.js index.css
+```
 
-### Making a Progressive Web App
+## Style
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The Ocean Professional palette is implemented via CSS variables in `App.css`. Retro accents appear as subtle repeating gradients on hero/tiles and dividers.
 
-### Advanced Configuration
+## Routing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+HashRouter ensures client-side routing works in static hosting environments. Pages:
+- `/` home
+- `/product/:id` details
+- `/cart`
+- `/checkout`
+- any other route → NotFound
