@@ -86,7 +86,7 @@ export async function fetchProducts() {
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
-  } catch (_) {
+  } catch {
     // Fallback to mock if API fails
     return MOCK_PRODUCTS;
   }
@@ -105,7 +105,7 @@ export async function fetchProductById(id) {
     );
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
-  } catch (_) {
+  } catch {
     return MOCK_PRODUCTS.find((p) => p.id === id) || null;
   }
 }
@@ -132,7 +132,7 @@ export async function submitCheckout(orderPayload) {
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
-  } catch (_) {
+  } catch {
     return confirmation;
   }
 }

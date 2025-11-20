@@ -1,5 +1,7 @@
 import pluginJs from "@eslint/js";
 import pluginReact from "eslint-plugin-react";
+import jsxA11y from "eslint-plugin-jsx-a11y";
+import prettier from "eslint-plugin-prettier";
 
 export default [
   // Target all JS/JSX-style files
@@ -13,11 +15,7 @@ export default [
         sourceType: "module",
         ecmaFeatures: { jsx: true },
       },
-      // Declare common globals to avoid false positives in browser/CRA projects.
-      // We keep this explicit rather than relying solely on `env` to work
-      // smoothly with flat config format.
       globals: {
-        // Browser globals
         window: true,
         document: true,
         localStorage: true,
@@ -25,28 +23,27 @@ export default [
         AbortController: true,
         setTimeout: true,
         clearTimeout: true,
-
-        // Jest/RTL test globals
         test: true,
         expect: true,
         jest: true,
-
-        // Node/Cra build-time env access
         process: true,
       },
     },
+    plugins: {
+      react: pluginReact,
+      "jsx-a11y": jsxA11y,
+      prettier,
+    },
     rules: {
       "no-unused-vars": ["error", { varsIgnorePattern: "React|App" }],
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-uses-react": "off",
+      "react/jsx-uses-vars": "error",
+      "prettier/prettier": "warn"
     },
   },
   // Base JS recommended rules
   pluginJs.configs.recommended,
-  {
-    plugins: { react: pluginReact },
-    rules: {
-      "react/react-in-jsx-scope": "off",
-      "react/jsx-uses-react": "off",
-      "react/jsx-uses-vars": "error",
-    },
-  },
+  // jsx-a11y recommended
+  jsxA11y.configs.recommended,
 ];

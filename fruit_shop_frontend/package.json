@@ -13,10 +13,15 @@
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{js,jsx,css,md,json,mjs}\"",
+    "format:check": "prettier -c \"**/*.{js,jsx,css,md,json,mjs}\"",
+    "depcheck": "depcheck",
+    "cycles": "madge --circular --extensions js,jsx src",
+    "audit:prod": "npm audit --omit=dev || true",
+    "audit:all": "npm audit || true",
+    "ci:verify": "npm-run-all -p lint format:check depcheck cycles",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
