@@ -10,17 +10,25 @@ export default [
         sourceType: "module",
         ecmaFeatures: { jsx: true }
       },
+      // Declare common browser and CRA globals to avoid false positives
       globals: {
         document: true,
         window: true,
         test: true,
-        expect: true
+        expect: true,
+        // Browser/Web APIs
+        fetch: true,
+        AbortController: true,
+        setTimeout: true,
+        clearTimeout: true,
+        localStorage: true,
+        // CRA build-time injected
+        process: true
       }
     },
     rules: {
-
-     'no-unused-vars': ['error', { varsIgnorePattern: 'React|App' }]
-
+      // Keep React/App ignored for examples and CRA scaffolds
+      'no-unused-vars': ['error', { varsIgnorePattern: 'React|App' }]
     }
   },
   pluginJs.configs.recommended,
